@@ -23,7 +23,7 @@ const HIGHLIGHT_PRODUCTS = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-neutral-100 text-slate-800 font-sans pb-24 md:pb-0">
+    <div className="min-h-screen bg-[#f3f4f6] text-[#111] font-sans pb-24 md:pb-0 selection:bg-offer selection:text-black">
       
       {/* Faixa superior de avisos (Tipico de mercado) */}
       <div className="w-full bg-[#111] text-zinc-300 py-1.5 px-4 flex items-center justify-between text-[11px] sm:text-xs font-medium tracking-wide">
@@ -45,12 +45,12 @@ export default function Home() {
               <Menu className="w-6 h-6" />
             </button>
             <div className="flex items-center gap-1.5">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-red-650 rounded-xl bg-red-600 text-white font-black text-2xl md:text-3xl flex items-center justify-center -rotate-2 shadow-sm">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary text-white font-black text-2xl md:text-3xl flex items-center justify-center -rotate-2 shadow-lg">
                 6
               </div>
               <div className="flex flex-col -space-y-1">
-                <span className="font-extrabold text-xl md:text-2xl text-slate-900 tracking-tighter">Sempre <span className="text-yellow-500">6</span></span>
-                <span className="text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest pl-0.5">Atacadista</span>
+                <span className="font-extrabold text-xl md:text-2xl text-slate-900 tracking-tighter">Sempre <span className="text-secondary">6</span></span>
+                <span className="text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest pl-0.5">Supermercado</span>
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@ export default function Home() {
           <div className="flex items-center gap-2 md:gap-4">
             <Link 
               href="/revista"
-              className="flex items-center gap-2 px-4 py-2 bg-yellow-400 hover:bg-yellow-500 text-yellow-950 font-extrabold rounded-lg shadow-sm transition-transform hover:scale-105 active:scale-95"
+              className="flex items-center gap-2 px-4 py-2 bg-secondary hover:brightness-95 text-green-950 font-extrabold rounded-lg shadow-sm transition-transform hover:scale-105 active:scale-95"
             >
               <BookOpen className="w-5 h-5" />
               <span className="hidden sm:inline">Folheto Digital</span>
@@ -92,7 +92,7 @@ export default function Home() {
             </span>
             <h1 className="text-4xl md:text-6xl font-black mb-4 leading-none tracking-tight">
               A HORA DO <br/>
-              <span className="text-yellow-400">PREÇO BAIXO.</span>
+              <span className="text-secondary">PREÇO BAIXO.</span>
             </h1>
             <p className="text-red-100 text-lg md:text-xl font-medium mb-8 max-w-md">
               Chegou o encarte de fim de mês. Economize muito no varejo e compre a preço de custo no atacado.
@@ -100,10 +100,10 @@ export default function Home() {
             
             <Link 
               href="/revista"
-              className="w-full sm:w-auto px-8 py-5 bg-white text-red-600 hover:bg-slate-50 font-black text-lg rounded-xl shadow-xl shadow-red-900/20 flex items-center justify-center gap-3 transition-transform hover:-translate-y-1"
+              className="w-full sm:w-auto px-8 py-5 bg-offer text-black hover:scale-105 font-black text-xl rounded-xl shadow-2xl shadow-yellow-500/20 flex items-center justify-center gap-3 transition-all active:scale-95 border-b-4 border-yellow-600"
             >
-              <BookOpen className="w-6 h-6" />
-              Folhear Agora
+              <BookOpen className="w-7 h-7" />
+              FOLHEAR AGORA
             </Link>
           </div>
 
@@ -120,7 +120,7 @@ export default function Home() {
                <div className="absolute -inset-4 bg-black/20 blur-2xl -z-10 rounded-full translate-y-8"></div>
                
                {/* Selo torto por cima da imagem */}
-               <div className="absolute -top-6 -right-6 bg-yellow-400 text-yellow-950 font-black text-xl p-4 rounded-full shadow-lg rotate-12 flex flex-col items-center justify-center leading-none scale-110">
+               <div className="absolute -top-6 -right-6 bg-secondary text-green-950 font-black text-xl p-4 rounded-full shadow-lg rotate-12 flex flex-col items-center justify-center leading-none scale-110">
                  <span>BAIXOU</span>
                  <span className="text-sm">TUDO!</span>
                </div>
@@ -162,14 +162,17 @@ export default function Home() {
                   {prod.name}
                 </h3>
                 
-                <div className="mt-auto flex flex-col bg-slate-50 rounded-lg p-3 border border-slate-100">
-                  <div className="text-xs text-slate-500 line-through mb-1">De: R$ {prod.oldPrice}</div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-slate-600 uppercase">Varejo:</span>
-                    <span className="text-xl md:text-2xl font-black text-red-600 leading-none">R$ {prod.currentPrice}</span>
-                  </div>
-                  <div className="mt-2 text-[10px] font-bold text-green-700 bg-green-100 px-2 py-1 rounded w-max">
-                    Atacado: R$ {(parseFloat(prod.currentPrice.replace(',', '.')) * 0.95).toFixed(2).replace('.', ',')} a partir de {prod.wholesaleAmount} un.
+                <div className="mt-auto flex flex-col bg-white rounded-lg p-3 border-2 border-slate-100 shadow-inner">
+                  <div className="text-xs text-slate-400 line-through mb-1 italic">De: R$ {prod.oldPrice}</div>
+                  <div className="bg-offer -mx-3 -mb-3 p-3 rounded-b-lg flex flex-col border-t-2 border-yellow-500">
+                    <div className="flex items-center justify-between mb-1">
+                       <span className="text-[10px] font-black text-black uppercase bg-black/5 px-1 rounded">Varejo</span>
+                       <span className="text-2xl md:text-3xl font-black text-red-700 leading-none tracking-tighter">R$ {prod.currentPrice}</span>
+                    </div>
+                    <div className="text-[11px] font-bold text-green-800 flex justify-between items-center">
+                      <span>No Atacado:</span>
+                      <span className="bg-green-600 text-white px-1.5 rounded">R$ {(parseFloat(prod.currentPrice.replace(',', '.')) * 0.95).toFixed(2).replace('.', ',')}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -179,22 +182,22 @@ export default function Home() {
       </section>
 
       {/* Banner Cartão Sempre 6 */}
-      <section id="cartao" className="py-12 bg-zinc-900 border-t-4 border-yellow-400">
+      <section id="cartao" className="py-12 bg-zinc-900 border-t-4 border-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex items-center gap-6">
-            <div className="w-24 h-16 rounded-xl bg-linear-to-tr from-yellow-500 to-yellow-300 shadow-md border border-yellow-200 rotate-[-5deg] flex items-center p-3 relative overflow-hidden">
+            <div className="w-24 h-16 rounded-xl bg-linear-to-tr from-secondary to-green-300 shadow-md border border-green-200 rotate-[-5deg] flex items-center p-3 relative overflow-hidden">
                <div className="absolute right-[-10px] top-0 bottom-0 bg-white/20 w-8 blur-sm rotate-15"></div>
-               <span className="text-yellow-950 font-black text-lg">6</span>
+               <span className="text-green-950 font-black text-lg">6</span>
             </div>
             <div>
               <h2 className="text-white text-2xl font-black mb-1">Ainda não tem o Cartão Sempre 6?</h2>
               <p className="text-zinc-400 font-medium text-sm">Pague preço de atacado desde a 1ª unidade. Descontos exclusivos na loja toda.</p>
             </div>
           </div>
-          <button className="px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-yellow-950 font-bold rounded-lg transition-colors w-full md:w-auto">
+          <button className="px-6 py-3 bg-secondary hover:brightness-95 text-green-950 font-bold rounded-lg transition-colors w-full md:w-auto">
             Pedir meu Cartão
           </button>
-        </div>
+ Linda paleta        </div>
       </section>
 
       {/* Footer Varejeiro realístico */}
